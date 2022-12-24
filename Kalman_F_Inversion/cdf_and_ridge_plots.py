@@ -15,7 +15,7 @@ plt.rcParams['font.size'] = fs
 ensemble_n = 400
 
 #### plot breakthrough curves of voxels in fracture (as determined by binary matrix)
-fig, axs = plt.subplots(2, 2, dpi=200, figsize=(5, 4.5))
+fig, axs = plt.subplots(2, 2, dpi=200, figsize=(8.5, 4.5))
 
 sig = np.random.uniform(0.1,1,ensemble_n)
 mu = 0 # mean
@@ -98,7 +98,7 @@ for i in range(0,ensemble_n):
     else:
         axs[0,0].plot(data_sorted, p, color='b', linewidth=0.5, alpha = 0.2, label='Initial Ensemble')
         axs[0,0].plot(data_sorted_fin, p, color='r', linewidth=0.5, alpha = 0.2, label='Final Ensemble')
-        legend = axs[0,0].legend(loc="best")
+        legend = axs[0,0].legend(loc="upper left")
         legend.get_title().set_fontsize('3')
 
 for tick in axs[0,0].xaxis.get_major_ticks():
@@ -132,7 +132,7 @@ for i in range(0,ensemble_n):
     else:
         axs[0,1].plot(data_sorted, p, color='b', linewidth=0.5, alpha = 0.2, label='Initial Ensemble')
         axs[0,1].plot(data_sorted_fin, p, color='r', linewidth=0.5, alpha = 0.2, label='Final Ensemble')
-        legend = axs[0,1].legend(loc="best")
+        legend = axs[0,1].legend(loc="upper left")
         legend.get_title().set_fontsize('3')
 
 
@@ -164,7 +164,7 @@ for i in range(0,ensemble_n):
     else:
         axs[1,0].plot(data_sorted, p, color='b', linewidth=0.5, alpha = 0.2, label='Initial Ensemble')
         axs[1,0].plot(data_sorted_fin, p, color='r', linewidth=0.5, alpha = 0.2, label='Final Ensemble')
-        legend = axs[1,0].legend(loc="best")
+        legend = axs[1,0].legend(loc="upper left")
         legend.get_title().set_fontsize('3')
 
 for tick in axs[1,0].xaxis.get_major_ticks():
@@ -196,7 +196,7 @@ for i in range(0,ensemble_n):
     else:
         axs[1,1].plot(data_sorted, p, color='b', linewidth=0.5, alpha = 0.2, label='Initial Ensemble')
         axs[1,1].plot(data_sorted_fin, p, color='r', linewidth=0.5, alpha = 0.2, label='Final Ensemble')
-        legend = axs[1,1].legend(loc="best")
+        legend = axs[1,1].legend(loc="upper left")
         legend.get_title().set_fontsize('3')
 
 for tick in axs[1,1].xaxis.get_major_ticks():
@@ -208,6 +208,8 @@ for tick in axs[1,1].yaxis.get_major_ticks():
 axs[1,1].set_title('Indiana')
 
 fig.subplots_adjust(wspace=0.25, hspace=0.25)
+plt.tight_layout()
+fig.savefig('AWR_CDF.jpg', format='jpg', dpi=1200)
 
 
 
@@ -337,5 +339,6 @@ np.savetxt('./Hyb_Ind_std.csv', Hyb_Ind_std, delimiter=',')
 np.savetxt('./Ind_std.csv', Ind_std, delimiter=',')
 
 axs2[4].set_xlabel('STD')
+fig2.savefig('AWR_RIDGE.jpg', format='jpg', dpi=1200)
 
 plt.show()
