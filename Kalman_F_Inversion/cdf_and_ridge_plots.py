@@ -30,8 +30,12 @@ for i in range(ensemble_n):
     dir_ini = Hyb_Ens_dir_ini + '/Initial_Berea_Ens/Ens' + str(i) + '.csv'
     dir_fin = Hyb_Ens_dir_fin + '/Final_Berea_Ens/Ens' + str(i) + '.csv'
 
-    ini_B.append(np.loadtxt(dir_ini , delimiter=',', dtype= np.float32))
-    fin_B.append(np.loadtxt(dir_fin , delimiter=',', dtype= np.float32))
+    # Convert everything to log10 permeability [mD]
+    hyb_fin = np.log10(np.exp(np.loadtxt(dir_ini , delimiter=',', dtype= np.float32)) / (1000 * 9.81 * 100 * 60 / 8.9E-4)/9.869233E-13*1000)
+    fin = np.log10(np.exp(np.loadtxt(dir_fin , delimiter=',', dtype= np.float32)) / (1000 * 9.81 * 100 * 60 / 8.9E-4)/9.869233E-13*1000)
+
+    ini_B.append(hyb_fin)
+    fin_B.append(fin)
 
 # Indiana Ensemble Loading
 ini_I = []
@@ -41,8 +45,12 @@ for i in range(ensemble_n):
     dir_ini = Hyb_Ens_dir_ini + '/Initial_Indiana_Ens/Ens' + str(i) + '.csv'
     dir_fin = Hyb_Ens_dir_fin + '/Final_Indiana_Ens/Ens' + str(i) + '.csv'
 
-    ini_I.append(np.loadtxt(dir_ini , delimiter=',', dtype= np.float32))
-    fin_I.append(np.loadtxt(dir_fin , delimiter=',', dtype= np.float32))
+    # Convert everything to log10 permeability [mD]
+    hyb_fin = np.log10(np.exp(np.loadtxt(dir_ini, delimiter=',', dtype=np.float32)) / (1000 * 9.81 * 100 * 60 / 8.9E-4)/9.869233E-13*1000)
+    fin = np.log10(np.exp(np.loadtxt(dir_fin, delimiter=',', dtype=np.float32)) / (1000 * 9.81 * 100 * 60 / 8.9E-4)/9.869233E-13*1000)
+
+    ini_I.append(hyb_fin)
+    fin_I.append(fin)
 
 # Navajo Ensemble Loading
 ini_N = []
@@ -52,8 +60,12 @@ for i in range(ensemble_n):
     dir_ini = Hyb_Ens_dir_ini + '/Initial_Navajo_Ens/Ens' + str(i) + '.csv'
     dir_fin = Hyb_Ens_dir_fin + '/Final_Navajo_Ens/Ens' + str(i) + '.csv'
 
-    ini_N.append(np.loadtxt(dir_ini , delimiter=',', dtype= np.float32))
-    fin_N.append(np.loadtxt(dir_fin , delimiter=',', dtype= np.float32))
+    # Convert everything to log10 permeability [mD]
+    hyb_fin = np.log10(np.exp(np.loadtxt(dir_ini, delimiter=',', dtype=np.float32)) / (1000 * 9.81 * 100 * 60 / 8.9E-4)/9.869233E-13*1000)
+    fin = np.log10(np.exp(np.loadtxt(dir_fin, delimiter=',', dtype=np.float32)) / (1000 * 9.81 * 100 * 60 / 8.9E-4)/9.869233E-13*1000)
+
+    ini_N.append(hyb_fin)
+    fin_N.append(fin)
 
 # Ketton Ensemble Loading
 ini_K = []
@@ -63,8 +75,12 @@ for i in range(ensemble_n):
     dir_ini = Hyb_Ens_dir_ini + '/Initial_Ketton_Ens/Ens' + str(i) + '.csv'
     dir_fin = Hyb_Ens_dir_fin + '/Final_Ketton_Ens/Ens' + str(i) + '.csv'
 
-    ini_K.append(np.loadtxt(dir_ini , delimiter=',', dtype= np.float32))
-    fin_K.append(np.loadtxt(dir_fin , delimiter=',', dtype= np.float32))
+    # Convert everything to log10 permeability [mD]
+    hyb_fin = np.log10(np.exp(np.loadtxt(dir_ini, delimiter=',', dtype=np.float32)) / (1000 * 9.81 * 100 * 60 / 8.9E-4)/9.869233E-13*1000)
+    fin = np.log10(np.exp(np.loadtxt(dir_fin, delimiter=',', dtype=np.float32)) / (1000 * 9.81 * 100 * 60 / 8.9E-4)/9.869233E-13*1000)
+
+    ini_K.append(hyb_fin)
+    fin_K.append(fin)
 
 # Edwards Ensemble Loading
 ini_E = []
@@ -74,8 +90,12 @@ for i in range(ensemble_n):
     dir_ini = Hyb_Ens_dir_ini + '/Initial_Edwards_Ens/Ens' + str(i) + '.csv'
     dir_fin = Hyb_Ens_dir_fin + '/Final_Edwards_Ens/Ens' + str(i) + '.csv'
 
-    ini_E.append(np.loadtxt(dir_ini , delimiter=',', dtype= np.float32))
-    fin_E.append(np.loadtxt(dir_fin , delimiter=',', dtype= np.float32))
+    # Convert everything to log10 permeability [mD]
+    hyb_fin = np.log10(np.exp(np.loadtxt(dir_ini, delimiter=',', dtype=np.float32)) / (1000 * 9.81 * 100 * 60 / 8.9E-4)/9.869233E-13*1000)
+    fin = np.log10(np.exp(np.loadtxt(dir_fin, delimiter=',', dtype=np.float32)) / (1000 * 9.81 * 100 * 60 / 8.9E-4)/9.869233E-13*1000)
+
+    ini_E.append(hyb_fin)
+    fin_E.append(fin)
 
 for i in range(0,ensemble_n):
     s = ini_B[i]
@@ -107,7 +127,7 @@ for tick in axs[0,0].xaxis.get_major_ticks():
 for tick in axs[0,0].yaxis.get_major_ticks():
     tick.label.set_fontsize(fs-2)
 
-fig.suptitle('Permeability Perturbation [mD] (EnKF-CNN)')
+fig.suptitle('log$_{10}$ Permeability Perturbation [mD] (EnKF-CNN)')
 # plt.xlabel('Permeability Perturbation')
 axs[0,0].set_ylabel('CDF')
 axs[0,0].set_title('Berea')
@@ -233,8 +253,12 @@ for i in range(ensemble_n):
     hyb_fin = Hyb_Ens_dir_fin + '/Final_Berea_Ens/Ens' + str(i) + '.csv'
     fin = Ens_dir_fin + '/Final_Berea_Ens/Ens' + str(i) + '.csv'
 
-    hyb_Ber_f.append(np.loadtxt(hyb_fin , delimiter=',', dtype= np.float32))
-    Ber_f.append(np.loadtxt(fin , delimiter=',', dtype= np.float32))
+    # Convert everything to log10 permeability
+    hyb_fin = np.log10(np.exp(np.loadtxt(hyb_fin , delimiter=',', dtype= np.float32)) / (1000 * 9.81 * 100 * 60 / 8.9E-4))
+    fin = np.log10(np.exp(np.loadtxt(fin , delimiter=',', dtype= np.float32)) / (1000 * 9.81 * 100 * 60 / 8.9E-4))
+
+    hyb_Ber_f.append(hyb_fin)
+    Ber_f.append(fin)
 
 # Indiana Ensemble Loading
 hyb_Ind_f = []
@@ -244,8 +268,12 @@ for i in range(ensemble_n):
     hyb_fin = Hyb_Ens_dir_fin + '/Final_Indiana_Ens/Ens' + str(i) + '.csv'
     fin = Ens_dir_fin + '/Final_Indiana_Ens/Ens' + str(i) + '.csv'
 
-    hyb_Ind_f.append(np.loadtxt(hyb_fin , delimiter=',', dtype= np.float32))
-    Ind_f.append(np.loadtxt(fin , delimiter=',', dtype= np.float32))
+    # Convert everything to log10 permeability
+    hyb_fin = np.log10(np.exp(np.loadtxt(hyb_fin, delimiter=',', dtype=np.float32)) / (1000 * 9.81 * 100 * 60 / 8.9E-4))
+    fin = np.log10(np.exp(np.loadtxt(fin, delimiter=',', dtype=np.float32)) / (1000 * 9.81 * 100 * 60 / 8.9E-4))
+
+    hyb_Ind_f.append(hyb_fin)
+    Ind_f.append(fin)
 
 # Navajo Ensemble Loading
 hyb_Nav_f = []
@@ -255,8 +283,12 @@ for i in range(ensemble_n):
     hyb_fin = Hyb_Ens_dir_fin + '/Final_Navajo_Ens/Ens' + str(i) + '.csv'
     fin = Ens_dir_fin + '/Final_Navajo_Ens/Ens' + str(i) + '.csv'
 
-    hyb_Nav_f.append(np.loadtxt(hyb_fin , delimiter=',', dtype= np.float32))
-    Nav_f.append(np.loadtxt(fin , delimiter=',', dtype= np.float32))
+    # Convert everything to log10 permeability
+    hyb_fin = np.log10(np.exp(np.loadtxt(hyb_fin, delimiter=',', dtype=np.float32)) / (1000 * 9.81 * 100 * 60 / 8.9E-4))
+    fin = np.log10(np.exp(np.loadtxt(fin, delimiter=',', dtype=np.float32)) / (1000 * 9.81 * 100 * 60 / 8.9E-4))
+
+    hyb_Nav_f.append(hyb_fin)
+    Nav_f.append(fin)
 
 # Ketton Ensemble Loading
 hyb_Ket_f = []
@@ -266,8 +298,12 @@ for i in range(ensemble_n):
     hyb_fin = Hyb_Ens_dir_fin + '/Final_Ketton_Ens/Ens' + str(i) + '.csv'
     fin = Ens_dir_fin + '/Final_Ketton_Ens/Ens' + str(i) + '.csv'
 
-    hyb_Ket_f.append(np.loadtxt(hyb_fin , delimiter=',', dtype= np.float32))
-    Ket_f.append(np.loadtxt(fin , delimiter=',', dtype= np.float32))
+    # Convert everything to log10 permeability
+    hyb_fin = np.log10(np.exp(np.loadtxt(hyb_fin, delimiter=',', dtype=np.float32)) / (1000 * 9.81 * 100 * 60 / 8.9E-4))
+    fin = np.log10(np.exp(np.loadtxt(fin, delimiter=',', dtype=np.float32)) / (1000 * 9.81 * 100 * 60 / 8.9E-4))
+
+    hyb_Ket_f.append(hyb_fin)
+    Ket_f.append(fin)
 
 # Edwards Ensemble Loading
 hyb_Edw_f = []
@@ -277,8 +313,12 @@ for i in range(ensemble_n):
     hyb_fin = Hyb_Ens_dir_fin + '/Final_Edwards_Ens/Ens' + str(i) + '.csv'
     fin = Ens_dir_fin + '/Final_Edwards_Ens/Ens' + str(i) + '.csv'
 
-    hyb_Edw_f.append(np.loadtxt(hyb_fin , delimiter=',', dtype= np.float32))
-    Edw_f.append(np.loadtxt(fin , delimiter=',', dtype= np.float32))
+    # Convert everything to log10 permeability
+    hyb_fin = np.log10(np.exp(np.loadtxt(hyb_fin, delimiter=',', dtype=np.float32)) / (1000 * 9.81 * 100 * 60 / 8.9E-4))
+    fin = np.log10(np.exp(np.loadtxt(fin, delimiter=',', dtype=np.float32)) / (1000 * 9.81 * 100 * 60 / 8.9E-4))
+
+    hyb_Edw_f.append(hyb_fin)
+    Edw_f.append(fin)
 
 
 fig2, axs2 = plt.subplots(N, figsize=(9, 9), constrained_layout=True)
@@ -338,7 +378,7 @@ axs2[4].legend()
 np.savetxt('./Hyb_Ind_std.csv', Hyb_Ind_std, delimiter=',')
 np.savetxt('./Ind_std.csv', Ind_std, delimiter=',')
 
-axs2[4].set_xlabel('STD')
+axs2[4].set_xlabel('log$_{10}$ Permeability Standard Deviation')
 fig2.savefig('AWR_RIDGE.jpg', format='jpg', dpi=1200)
 
 plt.show()
